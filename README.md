@@ -2,6 +2,18 @@
 
 This is a simple image resizing docker container service with python 2
 
+## 🛡️ Authentication
+
+This service requires an `Authorization` header using a bearer token:
+
+````
+Authorization: Bearer YOUR_SECRET_TOKEN
+````
+
+The token is injected via an environment variable called `AUTH_TOKEN`.
+
+---
+
 ## Parameters
 
 | Name  | Type | Desc |
@@ -12,16 +24,54 @@ This is a simple image resizing docker container service with python 2
 | w  |    Optional  | Width (Default 960px)  |
 | h  |    Optional  | Height (Default 960px)  |
 
-###### * One of the URL options or bg color is required, all other parameters are optional.
+\* One of the URL options (`url` or `url64`) or `bg` is required. All other parameters are optional.
 
 ------------
 
-## Buillding and running as a docker container
+## Installing
+
+```
+git clone https://github.com/saplumbaga/image-resizer-service.git
+cd image-resizer-service
+```
+
+## Pull the latest changes:
+
+````
+git pull origin main
+````
+
+## Building container manually
 
 ```
 docker build . --tag image-resizer
-docker run --rm -i -t -p 8000:18080 image-resizer
+docker run --rm -i -t -p 8000:18080 \
+  -e AUTH_TOKEN=e34f91b209a24c77b321ca7cb1dc0a83 \
+  image-resizer
 ```
+
+
+## With Docker Compose
+
+```
+version: '3.8'
+
+services:
+  image-resizer:
+    container_name: image-resizer
+    build: .
+    restart: always
+    ports:
+      - "8081:18080"
+    environment:
+      - AUTH_TOKEN=e34f91b209a24c77b321ca7cb1dc0a83
+
+```
+Run it with:
+
+````
+docker-compose up --build -d
+````
 
 ## Examples
 

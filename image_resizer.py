@@ -13,6 +13,11 @@ defaultSizes = 960, 960
 
 @app.route('/', methods=['POST', 'GET'])
 def thumb():
+
+    expected_token = os.environ.get('AUTH_TOKEN')
+    if auth_header != f'Bearer {expected_token}':
+        return "Unauthorized", 401
+    
     w = request.args.get('w')
     h = request.args.get('h')
     if w is None:

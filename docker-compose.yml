@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  image-resizer:
+    container_name: image-resizer
+    build: .
+    restart: always
+    ports:
+      - "8081:18080"
+    environment:
+      - AUTH_TOKEN=e34f91b209a24c77b321ca7cb1dc0a83
+
