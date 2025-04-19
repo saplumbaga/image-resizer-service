@@ -15,6 +15,7 @@ defaultSizes = 960, 960
 def thumb():
 
     expected_token = os.environ.get('AUTH_TOKEN')
+    auth_header = request.headers.get('Authorization')
     if auth_header != f'Bearer {expected_token}':
         return "Unauthorized", 401
     
