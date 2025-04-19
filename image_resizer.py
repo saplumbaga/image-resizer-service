@@ -45,6 +45,10 @@ def thumb():
         img = Image.new("RGB", size, '#' + bg)
 
     img_io = StringIO.StringIO()
+
+    if img.mode == 'RGBA':
+        img = img.convert('RGB')
+    
     img.save(img_io, 'JPEG', quality=70)
     img_io.seek(0)
     return send_file(img_io, mimetype='image/jpeg')
