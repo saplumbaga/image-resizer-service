@@ -46,7 +46,7 @@ git pull origin main
 ```
 docker build . --tag image-resizer
 docker run --rm -i -t -p 8000:18080 \
-  -e AUTH_TOKEN=e34f91b209a24c77b321ca7cb1dc0a83 \
+  -e AUTH_TOKEN=your_secret_token \
   image-resizer
 ```
 
@@ -64,7 +64,7 @@ services:
     ports:
       - "8081:18080"
     environment:
-      - AUTH_TOKEN=e34f91b209a24c77b321ca7cb1dc0a83
+      - AUTH_TOKEN=your_secret_token
 
 ```
 Run it with:
